@@ -5,7 +5,7 @@ class DoodleComponent extends React.Component {
   static defaultProps = {
     onChange: null,
     loadTimeOffset: 5,
-    lazyRadius: 30,
+    lazyRadius: 1,
     brushRadius: 3,
     brushColor: "#444",
     catenaryColor: "#0a0302",
