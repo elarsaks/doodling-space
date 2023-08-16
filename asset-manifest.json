@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/doodling-space/static/css/main.073c9b0a.css",
+    "main.js": "/doodling-space/static/js/main.abb681b7.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/doodling-space/static/js/787.c4e7f8f9.chunk.js",
+    "index.html": "/doodling-space/index.html",
+    "main.073c9b0a.css.map": "/doodling-space/static/css/main.073c9b0a.css.map",
+    "main.abb681b7.js.map": "/doodling-space/static/js/main.abb681b7.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/doodling-space/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.abb681b7.js"
+  ]
+}
