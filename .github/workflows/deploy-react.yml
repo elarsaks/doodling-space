@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: "18.16.1"
+          node-version: "17"
 
       - name: Cache dependencies
         uses: actions/cache@v2
