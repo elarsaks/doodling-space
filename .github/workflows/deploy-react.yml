@@ -1,4 +1,4 @@
-name: Delpoy react
+name: Deploy react
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           cd client/
-          npm i
+          npm i --legacy-peer-deps
 
       - name: Build
         run: |
           cd client
-          npm run build --legacy-peer-deps
+          npm run build 
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
