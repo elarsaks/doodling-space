@@ -3,7 +3,7 @@ name: Delpoy react
 on:
   push:
     branches:
-      - DEPLOY-react
+      - deploy-react
 
 jobs:
   deploy-react-to-gh-pages:
