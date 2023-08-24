@@ -32,7 +32,7 @@ const Overlay = styled.div<{ show: boolean }>`
   z-index: 1;
 `;
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<{ center: boolean }>`
   padding: 0.5em 1em;
   border: 1px solid #fff;
   border-radius: 0.3em;
@@ -40,6 +40,7 @@ const StyledButton = styled.button`
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: ${({ center }) => (center ? "0.8em" : "0.5em")};
 
   &:hover {
     background-color: rgba(1, 14, 33, 0.7);
@@ -83,7 +84,7 @@ const RoomMenu: React.FC = () => {
     <>
       <Overlay show={!isNewRoomCreated} />
       <RoomMenuContainer center={!isNewRoomCreated}>
-        <div>D O O D L E _ T O O L </div>
+        <div> D O O D L E </div>
         {isNewRoomCreated && (
           <StyledSelect value={selectedRoom} onChange={handleRoomChange}>
             <option value="" disabled>
@@ -97,8 +98,12 @@ const RoomMenu: React.FC = () => {
             ))}
           </StyledSelect>
         )}
-        <StyledButton onClick={handleCreateRoom}>Create New Room</StyledButton>
-        <StyledButton onClick={handleCreateRoom}>Join a Room</StyledButton>
+        <StyledButton center={!isNewRoomCreated} onClick={handleCreateRoom}>
+          Create New Room
+        </StyledButton>
+        <StyledButton center={!isNewRoomCreated} onClick={handleCreateRoom}>
+          Join a Room
+        </StyledButton>
       </RoomMenuContainer>
     </>
   );
