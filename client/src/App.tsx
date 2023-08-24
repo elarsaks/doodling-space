@@ -6,7 +6,7 @@ import RoomMenu from "./components/RoomMenu";
 function App() {
   return (
     <div className="App">
-      <Logo />
+      {/* <Logo /> */}
       <RoomMenu />
       <Menu />
       <Doodle />

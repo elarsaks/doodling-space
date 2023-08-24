@@ -5,9 +5,9 @@ const RoomMenuContainer = styled.div<{ center: boolean }>`
   position: absolute;
   z-index: 1;
   top: ${({ center }) => (center ? "50%" : "1vh")};
-  right: ${({ center }) => (center ? "50%" : "1vw")};
-  transform: ${({ center }) => (center ? "translate(50%, -50%)" : "none")};
-  transition: top 0.5s, right 0.5s;
+  left: ${({ center }) => (center ? "50%" : "1vw")};
+  transform: ${({ center }) => (center ? "translate(-50%, -50%)" : "none")};
+  transition: top 0.5s, left 0.5s;
   font-size: 1.5em;
   font-weight: bold;
   padding: 0.5em;
@@ -83,17 +83,20 @@ const RoomMenu: React.FC = () => {
     <>
       <Overlay show={!isNewRoomCreated} />
       <RoomMenuContainer center={!isNewRoomCreated}>
-        <div>R o o m s</div>
-        <StyledSelect value={selectedRoom} onChange={handleRoomChange}>
-          <option value="" disabled>
-            Select an existing room
-          </option>
-          {existingRooms.map((room) => (
-            <option key={room.id} value={room.id}>
-              {room.name}
+        <div>D O O D L E _ T O O L </div>
+        {isNewRoomCreated && (
+          <StyledSelect value={selectedRoom} onChange={handleRoomChange}>
+            <option value="" disabled>
+              Select an existing room
             </option>
-          ))}
-        </StyledSelect>
+
+            {existingRooms.map((room) => (
+              <option key={room.id} value={room.id}>
+                {room.name}
+              </option>
+            ))}
+          </StyledSelect>
+        )}
         <StyledButton onClick={handleCreateRoom}>Create New Room</StyledButton>
         <StyledButton onClick={handleCreateRoom}>Join a Room</StyledButton>
       </RoomMenuContainer>
