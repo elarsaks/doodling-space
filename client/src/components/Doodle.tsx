@@ -1,5 +1,5 @@
-import React from 'react';
-import CanvasDraw from 'react-canvas-draw';
+import React from "react";
+import CanvasDraw from "react-canvas-draw";
 
 class DoodleComponent extends React.Component {
   static defaultProps = {
@@ -28,8 +28,56 @@ class DoodleComponent extends React.Component {
     zoomExtents: { min: 0.33, max: 3 },
   };
 
+  containerRef: React.RefObject<HTMLDivElement> =
+    React.createRef<HTMLDivElement>();
+
+  state = {
+    isDragging: false,
+    startX: 0,
+    startY: 0,
+    xTranslate: 0,
+    yTranslate: 0,
+  };
+
+  handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    this.setState({
+      isDragging: true,
+      startX: e.clientX - this.state.xTranslate,
+      startY: e.clientY - this.state.yTranslate,
+    });
+  };
+
+  handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!this.state.isDragging) return;
+    e.preventDefault();
+
+    const xTranslate = e.clientX - this.state.startX;
+    const yTranslate = e.clientY - this.state.startY;
+
+    const container = this.containerRef.current;
+    if (container) {
+      container.style.transform = `translate(${xTranslate}px, ${yTranslate}px)`;
+    }
+  };
+
+  handleMouseUpOrLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    this.setState({ isDragging: false });
+  };
+
   render() {
-    return <CanvasDraw {...this.props} />;
+    return (
+      <div
+        ref={this.containerRef}
+        onMouseDown={this.handleMouseDown}
+        onMouseMove={this.handleMouseMove}
+        onMouseUp={this.handleMouseUpOrLeave}
+        onMouseLeave={this.handleMouseUpOrLeave}
+      >
+        <CanvasDraw {...this.props} />
+      </div>
+    );
   }
 }
 
