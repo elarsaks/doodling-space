@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const RoomMenuContainer = styled.div`
+const RoomMenuContainer = styled.div<{ center: boolean }>`
   position: absolute;
   z-index: 1;
-  top: 1vh;
-  right: 1vw;
+  top: ${({ center }) => (center ? "50%" : "1vh")};
+  right: ${({ center }) => (center ? "50%" : "1vw")};
+  transform: ${({ center }) => (center ? "translate(50%, -50%)" : "none")};
+  transition: top 0.5s, right 0.5s;
   font-size: 1.5em;
   font-weight: bold;
   padding: 0.5em;
@@ -17,6 +19,17 @@ const RoomMenuContainer = styled.div`
   flex-direction: column;
   gap: 0.5em;
   text-align: center;
+`;
+
+const Overlay = styled.div<{ show: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: ${({ show }) => (show ? "block" : "none")};
+  z-index: 1;
 `;
 
 const StyledButton = styled.button`
@@ -47,7 +60,6 @@ const StyledSelect = styled.select`
   }
 `;
 
-// Dummy data for existing rooms
 const existingRooms = [
   { id: "hash1", name: "Room 1" },
   { id: "hash2", name: "Room 2" },
@@ -56,6 +68,7 @@ const existingRooms = [
 
 const RoomMenu: React.FC = () => {
   const [selectedRoom, setSelectedRoom] = useState<string>("");
+  const [isNewRoomCreated, setIsNewRoomCreated] = useState<boolean>(false);
 
   const handleRoomChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedRoom(event.target.value);
@@ -63,24 +76,28 @@ const RoomMenu: React.FC = () => {
 
   const handleCreateRoom = () => {
     console.log("Creating a new room...");
+    setIsNewRoomCreated(true);
   };
 
   return (
-    <RoomMenuContainer>
-      <div>R o o m s</div>
-      <StyledSelect value={selectedRoom} onChange={handleRoomChange}>
-        <option value="" disabled>
-          Select an existing room
-        </option>
-        {existingRooms.map((room) => (
-          <option key={room.id} value={room.id}>
-            {room.name}
+    <>
+      <Overlay show={!isNewRoomCreated} />
+      <RoomMenuContainer center={!isNewRoomCreated}>
+        <div>R o o m s</div>
+        <StyledSelect value={selectedRoom} onChange={handleRoomChange}>
+          <option value="" disabled>
+            Select an existing room
           </option>
-        ))}
-      </StyledSelect>
-      <StyledButton onClick={handleCreateRoom}>Create New Room</StyledButton>
-      <StyledButton onClick={handleCreateRoom}>Join a Room</StyledButton>
-    </RoomMenuContainer>
+          {existingRooms.map((room) => (
+            <option key={room.id} value={room.id}>
+              {room.name}
+            </option>
+          ))}
+        </StyledSelect>
+        <StyledButton onClick={handleCreateRoom}>Create New Room</StyledButton>
+        <StyledButton onClick={handleCreateRoom}>Join a Room</StyledButton>
+      </RoomMenuContainer>
+    </>
   );
 };
 
